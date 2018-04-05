@@ -1,0 +1,37 @@
+[package]
+name = "rust-blue-pill"
+version = "0.1.0"
+authors = ["Michael Böckling <michael.boeckling@codecentric.de>"]
+
+[dependencies]
+cortex-m = "0.4.0"
+cortex-m-rtfm = "0.3.1"
+m = "0.1.1"
+nb = "0.1.1"
+#stm32f103xx = "*"
+embedded-hal = "*"
+
+serial-mp3-player-driver = { path = "/Users/michaelboeckling/git/serial-mp3-player-driver" }
+
+[dependencies.cortex-m-rt]
+version = "0.3.12"
+# Comment for the panic example.
+features = ["abort-on-panic"]
+
+[dependencies.stm32f103xx-hal]
+features = ["rt"]
+git = "https://github.com/japaric/stm32f103xx-hal"
+
+#[dependencies.stm32f103xx]
+#features = ["rt"]
+#version = "0.8.0"
+
+# disable both incremental compilation and parallel codegen to reduce the chances of running into
+# rust-lang/rust#47074
+[profile.dev]
+codegen-units = 1
+incremental = false
+
+[profile.release]
+debug = true
+lto = true
